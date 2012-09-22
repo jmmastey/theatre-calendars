@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "icalendar"
+# calendar parsing
 gem "nokogiri"
 gem "ri_cal"
 
