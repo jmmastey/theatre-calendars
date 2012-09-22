@@ -16,7 +16,8 @@ get '/schedule/:cal' do
     events.each do |ev|
       # build event
       event do
-        description ev[:title]
+        summary ev[:title]
+        description ev[:url]
         dtstart ev[:start]
         dtend ev[:end]
         location ev[:location]
