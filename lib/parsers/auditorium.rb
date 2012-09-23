@@ -3,7 +3,7 @@ require_relative 'generic_parser'
 class Auditorium < GenericParser
 
   title 'Auditorium Theater'
-  location '50 East Congress Parkway, Chicago, IL (auditoriumtheatre.org)'
+  location '50 East Congress Parkway, Chicago, IL'
   uri 'http://auditoriumtheatre.org/wb/pages/home/performances-events/calendar.php?date=%d'
 
   def events
@@ -12,7 +12,7 @@ class Auditorium < GenericParser
     event_xpath = "//table[@class='calendar']//td[@class='linkedweekendday' or @class='linkedweekday']"
     url_base = "http://auditoriumtheatre.org"
 
-    0.upto 1 do |n|
+    0.upto 3 do |n|
       fetch_page(date.to_s).xpath(event_xpath).each do |event|
         day = event.xpath("./div[@class='dayTxt']").text
         time = event.xpath(".//div[@class='eventItemTxt']").inner_html
@@ -34,10 +34,5 @@ class Auditorium < GenericParser
 
     events
   end
-
-  def fetch_page(date)
-    Nokogiri::HTML(open(uri.gsub("%d", date)))
-  end
-  private :fetch_page
 
 end

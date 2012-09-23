@@ -10,4 +10,10 @@ class GenericParser
   def self.location(str); @@location = str; end
   def location; @@location; end
 
+  def fetch_page(date)
+    Nokogiri::HTML(open(uri.gsub("%d", date)))
+  end
+  private :fetch_page
+
+
 end
