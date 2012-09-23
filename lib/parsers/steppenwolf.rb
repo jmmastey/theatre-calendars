@@ -11,7 +11,7 @@ class Steppenwolf < GenericParser
     working_date = Date.today
     date_xpath = "//ul[@class='calendar']//li[contains(@class,'curMonthDay')]"
 
-    0.upto 1 do |n|
+    0.upto 3 do |n|
       fetch_page(working_date.strftime("%m-%Y")).xpath(date_xpath).each do |date|
         day = date.xpath(".//span[@class='dayNumber']").text.gsub(/[^0-9]/, '')
         date.xpath(".//ul[@class='calEventList']//li").each do |event|
