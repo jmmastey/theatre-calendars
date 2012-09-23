@@ -29,7 +29,7 @@ class Steppenwolf < GenericParser
 #          :url => url_base + event.xpath("//div[@class='eventItemTxt']/a").attr('title').to_s
 #        }
 #      end
-#      date <<= 1
+#      date >>= 1
     end
 
     events

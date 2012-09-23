@@ -29,7 +29,7 @@ class Auditorium < GenericParser
           :url => url_base + event.xpath("//div[@class='eventItemTxt']/a").attr('href').to_s
         }
       end
-      date <<= 1
+      date >>= 1
     end
 
     events
