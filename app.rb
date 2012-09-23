@@ -6,14 +6,16 @@ calendar = Calendar.new
 
 get '/' do
   calendar.list.map do |cal|
-    "<a href='/schedule/#{cal}'>#{cal}</a>"
+    "<a href='/schedule/#{cal}'>#{cal}</a><br />"
   end
 end
 
 get '/schedule/:cal' do
-  events = calendar[params[:cal]].events
+  cal = calendar[params[:cal]]
+  raise "Unknown calendar #{params[:cal]}" unless cal
+
   RiCal.Calendar do
-    events.each do |ev|
+    cal.events.each do |ev|
       # build event
       event do
         summary ev[:title]
