@@ -26,7 +26,7 @@ class Auditorium < GenericParser
           :location => location,
           :start => start_time,
           :end => end_time,
-          :url => url_base + event.xpath("//div[@class='eventItemTxt']/a").attr('title').to_s
+          :url => url_base + event.xpath("//div[@class='eventItemTxt']/a").attr('href').to_s
         }
       end
       date <<= 1

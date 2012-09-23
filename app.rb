@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'tzinfo'
 require 'ri_cal'
 require_relative 'lib/calendar'
 
@@ -15,6 +16,8 @@ get '/schedule/:cal' do
   raise "Unknown calendar #{params[:cal]}" unless cal
 
   RiCal.Calendar do
+    self.default_tzid = "America/Chicago"
+
     cal.events.each do |ev|
       # build event
       event do
