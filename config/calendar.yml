@@ -1,5 +1,6 @@
 calendars:
   - Auditorium
   - Steppenwolf
+  - Lyric
 
 default_tzid: America/Chicago

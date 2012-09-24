@@ -3,7 +3,7 @@ require 'open-uri'
 
 class GenericParser
 
-  attr_accessor :working_date
+  attr_accessor :working_date, :day
 
   # DSL-style accessors, for fun
   def self.title(str); define_method(:title) { str }; end
@@ -33,5 +33,8 @@ class GenericParser
     events
   end
 
+  def make_time(time)
+   Time.parse("#{self.working_date.year}-#{self.working_date.month}-#{self.day} #{time}")
+  end
 
 end

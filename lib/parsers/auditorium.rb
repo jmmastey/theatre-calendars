@@ -9,11 +9,11 @@ class Auditorium < GenericParser
 
   def parse_date(date)
     url_base = "http://auditoriumtheatre.org"
-    day = date.xpath("./div[@class='dayTxt']").text
+    self.day = date.xpath("./div[@class='dayTxt']").text
     date.xpath(".//div[@class='eventItem']").map do |event|
       time = event.xpath(".//div[@class='eventItemTxt']").inner_html
         .gsub(/.*<br>/, '').gsub(/[\(\)]/, '')
-      start_time = Time.parse("#{self.working_date.year}-#{self.working_date.month}-#{day} #{time}")
+      start_time = make_time(time)
 
       {
         :title => event.xpath(".//div[@class='eventItemTxt']/a").attr('title').to_s,
