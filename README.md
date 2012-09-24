@@ -4,12 +4,13 @@ There are so many great theatres in Chicago, but most of their calendars of even
 
 ## How to Use
 
-Visit the app (currently living at https://github.com/jmmastey/theatre-calendars), and click on the theatre you want a calendar for. In Google Calendar, click on Other Calendars -> Add by URL, and paste the URL from the calendar. Google Calendar should now automatically feed and update the calendar with events from the chosen venue.
+Visit the app (currently living at http://powerful-caverns-1286.herokuapp.com/), and click on the theatre you want a calendar for. In Google Calendar, click on Other Calendars -> Add by URL, and paste the URL from the calendar. Google Calendar should now automatically feed and update the calendar with events from the chosen venue.
 
 ## Todo
 
 - More Theatres
   - Second City
   - Carpenter Stage
-- Customizable Months
+- Non-Terrible Interface
+- Customizable Lookahead Duration
 - Blacklist of Events

@@ -3,28 +3,35 @@ require 'open-uri'
 
 class GenericParser
 
-  def self.title(str)
-    define_method :title do
-      str
-    end
-  end
+  attr_accessor :working_date
 
-  def self.uri(str)
-    define_method :uri do
-      str
-    end
-  end
+  # DSL-style accessors, for fun
+  def self.title(str); define_method(:title) { str }; end
+  def self.uri(str); define_method(:uri) { str }; end
+  def self.location(str); define_method(:location) { str }; end
+  def self.date_xpath(str); define_method(:date_xpath) { str }; end
 
-  def self.location(str)
-    define_method :location do
-      str
-    end
-  end
-
-  def fetch_page(date)
-    Nokogiri::HTML(open(uri.gsub("%d", date)))
+  def fetch_page
+    Nokogiri::HTML(open(self.working_date.strftime(uri)))
   end
   private :fetch_page
+
+  def parse_date(date)
+    [ ]
+  end
+
+  def events(months = 3)
+    events = []
+    self.working_date = Date.today
+
+    months.times do
+      fetch_page.xpath(date_xpath).each do |date|
+        events += parse_date(date)
+      end
+      self.working_date >>= 1
+    end
+    events
+  end
 
 
 end

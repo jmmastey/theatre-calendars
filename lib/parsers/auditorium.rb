@@ -4,37 +4,25 @@ class Auditorium < GenericParser
 
   title 'Auditorium Theater'
   location '50 East Congress Parkway, Chicago, IL'
-  uri 'http://auditoriumtheatre.org/wb/pages/home/performances-events/calendar.php?date=%d'
+  uri 'http://auditoriumtheatre.org/wb/pages/home/performances-events/calendar.php?date=%Y-%m-01'
+  date_xpath "//table[@class='calendar']//td[@class='linkedweekendday' or @class='linkedweekday']"
 
-  def events
-    events = []
-    working_date = Date.today
-    date_xpath = "//table[@class='calendar']//td[@class='linkedweekendday' or @class='linkedweekday']"
+  def parse_date(date)
     url_base = "http://auditoriumtheatre.org"
+    day = date.xpath("./div[@class='dayTxt']").text
+    date.xpath(".//div[@class='eventItem']").map do |event|
+      time = event.xpath(".//div[@class='eventItemTxt']").inner_html
+        .gsub(/.*<br>/, '').gsub(/[\(\)]/, '')
+      start_time = Time.parse("#{self.working_date.year}-#{self.working_date.month}-#{day} #{time}")
 
-    0.upto 3 do |n|
-      fetch_page(working_date.to_s).xpath(date_xpath).each do |date|
-        day = date.xpath("./div[@class='dayTxt']").text
-        date.xpath(".//div[@class='eventItem']").each do |event|
-          time = event.xpath(".//div[@class='eventItemTxt']").inner_html
-          .gsub(/.*<br>/, '').gsub(/[\(\)]/, '')
-
-          start_time = Time.parse("#{working_date.year}-#{working_date.month}-#{day} #{time}")
-          end_time = start_time + 7200
-
-          events << {
-            :title => event.xpath(".//div[@class='eventItemTxt']/a").attr('title').to_s,
-            :location => location,
-            :start => start_time,
-            :end => end_time,
-            :url => url_base + event.xpath(".//div[@class='eventItemTxt']/a").attr('href').to_s
-          }
-        end
-      end
-      working_date >>= 1
+      {
+        :title => event.xpath(".//div[@class='eventItemTxt']/a").attr('title').to_s,
+        :location => location,
+        :start => start_time,
+        :end => start_time + 7200,
+        :url => url_base + event.xpath(".//div[@class='eventItemTxt']/a").attr('href').to_s
+      }
     end
-
-    events
   end
 
 end
