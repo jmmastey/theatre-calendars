@@ -16,7 +16,7 @@ get '/schedule/:cal' do
   raise "Unknown calendar #{params[:cal]}" unless cal
 
   RiCal.Calendar do
-    self.default_tzid = "America/Chicago"
+    self.default_tzid = calendar.default_tzid
 
     cal.events.each do |ev|
       # build event

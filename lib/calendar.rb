@@ -28,4 +28,8 @@ class Calendar
     @config ||= YAML.load_file('config/calendar.yml')
   end
 
+  def default_tzid
+    config['default_tzid']
+  end
+
 end

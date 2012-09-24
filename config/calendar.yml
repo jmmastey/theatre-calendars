@@ -1,3 +1,5 @@
 calendars:
   - Auditorium
   - Steppenwolf
+
+default_tzid: America/Chicago
