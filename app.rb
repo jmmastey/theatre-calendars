@@ -7,12 +7,12 @@ calendar = Calendar.new
 
 get '/' do
   calendar.list.map do |cal|
-    "<a href='/schedule/#{cal}'>#{cal}</a><br />"
+    "<a href='/schedule/#{cal}.ipub'>#{cal}</a><br />"
   end
 end
 
-get '/schedule/:cal.ical' do
-  cal = calendar[params[:cal]]
+get '/schedule/:cal' do
+  cal = calendar[params[:cal].gsub(/.ipub/, '')]
   raise "Unknown calendar #{params[:cal]}" unless cal
 
   RiCal.Calendar do
