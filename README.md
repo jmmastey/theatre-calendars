@@ -10,6 +10,7 @@ Visit the app (currently living at http://powerful-caverns-1286.herokuapp.com/),
 
 - More Theatres
   - Second City
+  - iO Theatre (http://ioimprov.com/chicago/schedule/0/9/2012)
   - Carpenter Stage
 - Non-Terrible Interface
 - Customizable Lookahead Duration

@@ -11,7 +11,7 @@ get '/' do
   end
 end
 
-get '/schedule/:cal' do
+get '/schedule/:cal.ical' do
   cal = calendar[params[:cal]]
   raise "Unknown calendar #{params[:cal]}" unless cal
 
