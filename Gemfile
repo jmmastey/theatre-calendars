@@ -8,7 +8,6 @@ gem "tzinfo"
 
 # publishing
 gem "sinatra"
-gem "heroku"
 
 
 # dev stuff
